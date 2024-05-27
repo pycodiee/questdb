@@ -22,6 +22,28 @@
  *
  ******************************************************************************/
 
+// package io.questdb.cliutil;
+
+// import io.questdb.cairo.CairoException;
+// import io.questdb.cairo.RebuildColumnBase;
+// import io.questdb.log.Log;
+// import io.questdb.log.LogFactory;
+// import io.questdb.std.str.Utf8String;
+
+// public class CmdUtils {
+//     static void runColumnRebuild(RebuildColumnCommandArgs params, RebuildColumnBase ri) {
+//         final Log log = LogFactory.getLog("recover-var-index");
+//         ri.of(new Utf8String(params.tablePath));
+//         try {
+//             ri.reindex(params.partition, params.column);
+//         } catch (CairoException ex) {
+//             log.error().$(ex.getFlyweightMessage()).$();
+//         }
+//     }
+// }
+
+
+// the improved version of code
 package io.questdb.cliutil;
 
 import io.questdb.cairo.CairoException;
@@ -31,13 +53,25 @@ import io.questdb.log.LogFactory;
 import io.questdb.std.str.Utf8String;
 
 public class CmdUtils {
-    static void runColumnRebuild(RebuildColumnCommandArgs params, RebuildColumnBase ri) {
+    public static void runColumnRebuild(RebuildColumnCommandArgs params, RebuildColumnBase ri) {
         final Log log = LogFactory.getLog("recover-var-index");
-        ri.of(new Utf8String(params.tablePath));
+
         try {
+            ri.of(new Utf8String(params.tablePath));
             ri.reindex(params.partition, params.column);
         } catch (CairoException ex) {
             log.error().$(ex.getFlyweightMessage()).$();
         }
     }
 }
+package io.questdb.cliutil;
+
+public class RebuildColumnCommandArgs {
+    public String tablePath;
+    public String partition;
+    public String column;
+
+    // Constructors, getters, and setters can be added here
+}
+
+
